@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct Challenge_IBMApp: App {
+    
+    let userDefaultsService = UserDefaultsService()
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            return UnauthenticatedCoordinator().view()
         }
     }
 }

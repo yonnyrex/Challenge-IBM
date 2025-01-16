@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		EA76464A2D38947300AD1E9E /* Stinsen in Frameworks */ = {isa = PBXBuildFile; productRef = EA7646492D38947300AD1E9E /* Stinsen */; };
+		EA7646662D38A3A500AD1E9E /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = EA7646652D38A3A500AD1E9E /* Moya */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		EA76461E2D3772EC00AD1E9E /* Challenge-IBM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Challenge-IBM.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -23,6 +28,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA7646662D38A3A500AD1E9E /* Moya in Frameworks */,
+				EA76464A2D38947300AD1E9E /* Stinsen in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -33,6 +40,7 @@
 			isa = PBXGroup;
 			children = (
 				EA7646202D3772EC00AD1E9E /* Challenge-IBM */,
+				EA7646642D38A3A500AD1E9E /* Frameworks */,
 				EA76461F2D3772EC00AD1E9E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -43,6 +51,13 @@
 				EA76461E2D3772EC00AD1E9E /* Challenge-IBM.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		EA7646642D38A3A500AD1E9E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -65,6 +80,8 @@
 			);
 			name = "Challenge-IBM";
 			packageProductDependencies = (
+				EA7646492D38947300AD1E9E /* Stinsen */,
+				EA7646652D38A3A500AD1E9E /* Moya */,
 			);
 			productName = "Challenge-IBM";
 			productReference = EA76461E2D3772EC00AD1E9E /* Challenge-IBM.app */;
@@ -94,6 +111,10 @@
 			);
 			mainGroup = EA7646152D3772EC00AD1E9E;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				EA7646472D38946800AD1E9E /* XCRemoteSwiftPackageReference "Moya" */,
+				EA7646482D38947300AD1E9E /* XCRemoteSwiftPackageReference "stinsen" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = EA76461F2D3772EC00AD1E9E /* Products */;
 			projectDirPath = "";
@@ -324,6 +345,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		EA7646472D38946800AD1E9E /* XCRemoteSwiftPackageReference "Moya" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Moya/Moya.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 15.0.3;
+			};
+		};
+		EA7646482D38947300AD1E9E /* XCRemoteSwiftPackageReference "stinsen" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/rundfunk47/stinsen";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.13;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		EA7646492D38947300AD1E9E /* Stinsen */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EA7646482D38947300AD1E9E /* XCRemoteSwiftPackageReference "stinsen" */;
+			productName = Stinsen;
+		};
+		EA7646652D38A3A500AD1E9E /* Moya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EA7646472D38946800AD1E9E /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = Moya;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = EA7646162D3772EC00AD1E9E /* Project object */;
 }
