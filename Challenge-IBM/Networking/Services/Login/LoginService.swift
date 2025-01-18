@@ -18,7 +18,7 @@ struct LoginService: LoginServiceType {
     
     func login(user: String, password: String) -> AnyPublisher<LoginResponse, ServiceError> {
         return Future<LoginResponse, ServiceError> { promise in
-            if user == "Admin" && password == "Password*123" {
+            if user == "Test" && password == "password" {
                 let response = LoginResponse(success: true, message: "Bienvenido")
                 promise(.success(response))
             } else {

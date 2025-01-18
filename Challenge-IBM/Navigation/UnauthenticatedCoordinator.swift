@@ -17,10 +17,21 @@ final class UnauthenticatedCoordinator: NavigationCoordinatable {
     // MARK: - Root Definition
     @Root var start = makeStart
     
+    // MARK: - Routes
+    @Root var authenticated = authenticatedCoordinator
+
     // MARK: - Public Methods
     @ViewBuilder
     func makeStart() -> some View {
-        LoginView()
+        if let isLogin = userDefaultsService.retrieve(for: .isLogin) as? Bool, isLogin {
+            authenticatedCoordinator().view()
+        } else {
+            LoginView()
+        }
+    }
+    
+    func authenticatedCoordinator() -> NavigationViewCoordinator<AuthenticatedCoordinator> {
+        AuthenticatedCoordinator().eraseToNavigationCoordinator()
     }
     
 }

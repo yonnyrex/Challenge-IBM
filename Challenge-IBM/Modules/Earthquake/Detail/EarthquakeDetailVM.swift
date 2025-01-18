@@ -1,41 +1,41 @@
 //
-//  LoginVM.swift
+//  EarthquakeDetailVM.swift
 //  Challenge-IBM
 //
-//  Created by Yonny on 14/01/25.
+//  Created by Yonny on 18/01/25.
 //
 
 import Foundation
 import Combine
 import Stinsen
+import SwiftUI
 
-class LoginVM: ObservableObject {
-        
+class EarthquakeDetailVM: ObservableObject {
+    
     // MARK: - Propety Wrappers
-    @RouterObject var router: UnauthenticatedCoordinator.Router?
-    @Published var user = ""
-    @Published var password = ""
-    @Published var error: LoginError?
+    @RouterObject var router: AuthenticatedCoordinator.Router?
+    @Published var error: EarthquakeError?
     @Published var isLoading = false
     @Published var displayError = false
-    
+    @Published var earthquake: EarthquakeFeature?
+
     // MARK: - Variables
-    private var loginService: LoginServiceType
+    private var earthquakeService: EarthquakeServiceType
     private var cancellables: Set<AnyCancellable> = .init()
     private var userDefaults: PersistenceServiceType
+    private var eventID: String
 
-    var fieldsAreEmpty: Bool {
-        user.isEmpty || password.isEmpty
-    }
-    
     // MARK: - Initializer
     init(
-        loginService: LoginServiceType = LoginService(),
-        userDefaults: PersistenceServiceType = UserDefaultsService()
+        earthquakeService: EarthquakeServiceType = EarthquakeService(),
+        userDefaults: PersistenceServiceType = UserDefaultsService(),
+        eventID: String
     ) {
-        self.loginService = loginService
+        self.earthquakeService = earthquakeService
         self.userDefaults = userDefaults
+        self.eventID = eventID
         setupBindings()
+        getDetailEarthquake()
     }
     
     // MARK: - Methods
@@ -49,11 +49,11 @@ class LoginVM: ObservableObject {
             .store(in: &cancellables)
     }
     
-    
-    func login() {
+    func getDetailEarthquake() {
+        guard !isLoading else { return }
         isLoading = true
-        loginService
-            .login(user: user, password: password)
+        earthquakeService
+            .getEarthquakeDetail(eventID: eventID)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] result in
                 self?.isLoading = false
@@ -63,11 +63,16 @@ class LoginVM: ObservableObject {
                 case .finished:
                     return
                 }
-            } receiveValue: { result in
-                self.userDefaults.save(key: .isLogin, value: result.success)
-                self.router?.root(\.authenticated)
+            } receiveValue: { [weak self] response in
+                guard let self = self else { return }
+                earthquake = response
+                isLoading = false
             }
             .store(in: &cancellables)
+    }
+
+    func popLast() {
+        router?.popLast()
     }
     
 }
